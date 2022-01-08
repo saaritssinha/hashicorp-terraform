@@ -1,0 +1,534 @@
+Subversion- by apache----centralised version control system,
+helixcore-CVCS
+perforve, mercurial, github------Distributed verion control system
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ pwd
+/home/ubuntu/gitdemo
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git status
+fatal: not a git repository (or any of the parent directories): .git
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git init
+Initialized empty Git repository in /home/ubuntu/gitdemo/.git/
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ ls -al
+total 12
+drwxrwxr-x 3 ubuntu ubuntu 4096 Nov 25 00:23 .
+drwxr-xr-x 5 ubuntu ubuntu 4096 Nov 25 00:22 ..
+drwxrwxr-x 7 ubuntu ubuntu 4096 Nov 25 00:23 .git
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ cd .git/
+
+ubuntu@ip-172-31-31-36:~/gitdemo/.git$ ls -a
+.  ..  HEAD  branches  config  description  hooks  info  objects  refs
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git status
+On branch master
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ ll
+total 20
+drwxrwxr-x 3 ubuntu ubuntu 4096 Nov 25 00:29 ./
+drwxr-xr-x 5 ubuntu ubuntu 4096 Nov 25 00:29 ../
+drwxrwxr-x 7 ubuntu ubuntu 4096 Nov 25 00:28 .git/
+-rw-rw-r-- 1 ubuntu ubuntu   19 Nov 25 00:29 test1
+-rw-rw-r-- 1 ubuntu ubuntu   21 Nov 25 00:29 test2
+
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        test1
+        test2
+
+nothing added to commit but untracked files present (use "git add" to tr
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git branch    ////no branch created
+ubuntu@ip-172-31-31-36:~/gitdemo$
+
+git add . //add files from working directory to staging area
+
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git add test1
+ubuntu@ip-172-31-31-36:~/gitdemo$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   test1
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        test2
+
+
+
+git commit -m ""  ///from staging are to local git repository
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git commit -m "first commit"
+[master (root-commit) 07942e7] first commit
+ Committer: Ubuntu <ubuntu@ip-172-31-31-36.us-east-2.compute.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test1
+
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        test2
+
+nothing added to commit but untracked files present (use "git add" to tr
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git log
+commit 07942e74d5fd6d92c3c7a78297a6481c554557c6 (HEAD -> master)
+Author: Ubuntu <ubuntu@ip-172-31-31-36.us-east-2.compute.internal>
+Date:   Thu Nov 25 00:34:31 2021 +0000
+
+    first commit
+
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git add .
+ubuntu@ip-172-31-31-36:~/gitdemo$ git commit -m "2 files add"
+[master c7e2548] 2 files add
+ Committer: Ubuntu <ubuntu@ip-172-31-31-36.us-east-2.compute.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test2
+
+
+
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git status
+On branch master
+nothing to commit, working tree clean
+
+
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ ll
+total 20
+drwxrwxr-x 3 ubuntu ubuntu 4096 Nov 25 00:29 ./
+drwxr-xr-x 5 ubuntu ubuntu 4096 Nov 25 00:29 ../
+drwxrwxr-x 8 ubuntu ubuntu 4096 Nov 25 00:37 .git/
+-rw-rw-r-- 1 ubuntu ubuntu   19 Nov 25 00:29 test1
+-rw-rw-r-- 1 ubuntu ubuntu   21 Nov 25 00:29 test2
+ubuntu@ip-172-31-31-36:~/gitdemo$ vi test1
+ubuntu@ip-172-31-31-36:~/gitdemo$ ls
+test1  test2
+ubuntu@ip-172-31-31-36:~/gitdemo$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   test1
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git commit -m "modified"
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   test1
+
+no changes added to commit (use "git add" and/or "git commit -a")
+ubuntu@ip-172-31-31-36:~/gitdemo$ git add .
+ubuntu@ip-172-31-31-36:~/gitdemo$ git commit -m "modified"
+[master bba13f2] modified
+ Committer: Ubuntu <ubuntu@ip-172-31-31-36.us-east-2.compute.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+
+
+
+git push //// to push to remote repo
+git pull ///  to pull from remote repo
+
+git remote add origin https://github.com/saaritssinha/gitdemo.git
+ubuntu@ip-172-31-31-36:~/gitdemo$ git push origin master
+Username for 'https://github.com': saaritssinha
+Password for 'https://saaritssinha@github.com':
+remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.
+fatal: Authentication failed for 'https://github.com/saaritssinha/gitdemo.git/'
+
+https://www.youtube.com/watch?v=kHkQnuYzwoo
+
+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 ///------- personal access token for github
+
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git config --global user.name "saaritssinha"
+ubuntu@ip-172-31-31-36:~/gitdemo$ git config --global user.email "saaritssinha1                   6@gmail.com"
+ubuntu@ip-172-31-31-36:~/gitdemo$ git config -l
+user.name=saaritssinha
+user.email=saaritssinha16@gmail.com
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/saaritssinha/gitdemo.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+
+
+ubuntu@ip-172-31-31-36:~/gitdemo$ git push origin master
+Username for 'https://github.com': saaritssinha
+Password for 'https://saaritssinha@github.com':
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (9/9), 741 bytes | 741.00 KiB/s, done.
+Total 9 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+remote:
+remote: Create a pull request for 'master' on GitHub by visiting:
+remote:      https://github.com/saaritssinha/gitdemo/pull/new/master
+remote:
+To https://github.com/saaritssinha/gitdemo.git
+ * [new branch]      master -> master
+
+
+ubuntu@ip-172-31-31-36:~$ git clone https://github.com/saaritssinha/testrepo.git
+Cloning into 'testrepo'...
+warning: You appear to have cloned an empty repository.
+
+
+ubuntu@ip-172-31-31-36:~/testrepo$ git remote -v
+origin  https://github.com/saaritssinha/testrepo.git (fetch)
+origin  https://github.com/saaritssinha/testrepo.git (push)
+
+
+ubuntu@ip-172-31-31-36:~/testrepo$ cd ..
+ubuntu@ip-172-31-31-36:~$ mkdir training
+ubuntu@ip-172-31-31-36:~$ ls
+gitdemo  testrepo  training
+ubuntu@ip-172-31-31-36:~$ cd t
+-bash: cd: t: No such file or directory
+ubuntu@ip-172-31-31-36:~$ cd training/
+ubuntu@ip-172-31-31-36:~/training$ ll
+total 8
+drwxrwxr-x 2 ubuntu ubuntu 4096 Nov 25 02:02 ./
+drwxr-xr-x 7 ubuntu ubuntu 4096 Nov 25 02:02 ../
+ubuntu@ip-172-31-31-36:~/training$ ls
+ubuntu@ip-172-31-31-36:~/training$ git init
+Initialized empty Git repository in /home/ubuntu/training/.git/
+
+
+
+ubuntu@ip-172-31-31-36:~/training$ git init
+Initialized empty Git repository in /home/ubuntu/training/.git/
+ubuntu@ip-172-31-31-36:~/training$ git remote -v
+ubuntu@ip-172-31-31-36:~/training$ touch test
+ubuntu@ip-172-31-31-36:~/training$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        test
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+ubuntu@ip-172-31-31-36:~/training$ git add .
+ubuntu@ip-172-31-31-36:~/training$ git commit -m "addition"
+[master (root-commit) 13b7652] addition
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 test
+ubuntu@ip-172-31-31-36:~/training$ git push origin master
+fatal: 'origin' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+
+ubuntu@ip-172-31-31-36:~/training$ remote -v
+remote: command not found
+ubuntu@ip-172-31-31-36:~/training$ git remote -v
+ubuntu@ip-172-31-31-36:~/training$ git remote add orgin https://github.com/saaritssinha/newrepo.git
+
+
+
+ubuntu@ip-172-31-31-36:~/training$ git remote -v
+orgin   https://github.com/saaritssinha/newrepo.git (fetch)
+orgin   https://github.com/saaritssinha/newrepo.git (push)
+
+
+
+
+ubuntu@ip-172-31-31-36:~/training$ git push orgin master
+Username for 'https://github.com': saaritssinha
+Password for 'https://saaritssinha@github.com':
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 201 bytes | 201.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/saaritssinha/newrepo.git
+ * [new branch]      master -> master
+
+
+git remote add origin xyz /// only if you arent cloning the repo, if you are cloning then origin is set by itself
+
+ubuntu@ip-172-31-31-36:~/training$ touch new
+ubuntu@ip-172-31-31-36:~/training$ git remote -v
+orgin   https://github.com/saaritssinha/newrepo.git (fetch)
+orgin   https://github.com/saaritssinha/newrepo.git (push)
+
+
+adding readme file in github newrepo
+
+ubuntu@ip-172-31-31-36:~/training$ git pull orgin master
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), 664 bytes | 664.00 KiB/s, done.
+From https://github.com/saaritssinha/newrepo
+ * branch            master     -> FETCH_HEAD
+   13b7652..32e39e9  master     -> orgin/master
+Updating 13b7652..32e39e9
+Fast-forward
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+ubuntu@ip-172-31-31-36:~/training$ ls
+README.md  new  test
+
+
+ubuntu@ip-172-31-31-36:~/training$ git log --pretty=oneline
+32e39e905a71611198f979046436abcb36ecf2dc (HEAD -> master, orgin/master) Create README.md
+13b76525091c0e3fbcf30b40478c6c07719f6975 addition
+
+
+ubuntu@ip-172-31-31-36:~/training$ git branch
+* master
+ubuntu@ip-172-31-31-36:~/training$ git branch feature
+ubuntu@ip-172-31-31-36:~/training$ git branch
+  feature
+* master
+
+
+ubuntu@ip-172-31-31-36:~/training$ git checkout feature
+Switched to branch 'feature'
+ubuntu@ip-172-31-31-36:~/training$ git branch
+* feature
+  master
+
+
+ubuntu@ip-172-31-31-36:~/training$ git log --pretty=oneline
+32e39e905a71611198f979046436abcb36ecf2dc (HEAD -> feature, orgin/master, master) Create README.md
+13b76525091c0e3fbcf30b40478c6c07719f6975 addition
+
+
+ubuntu@ip-172-31-31-36:~/training$ echo "hello world" > newfile1
+ubuntu@ip-172-31-31-36:~/training$ git add .
+ubuntu@ip-172-31-31-36:~/training$ git commit -m "adding files in feature"
+[feature 2547c21] adding files in feature
+ 2 files changed, 1 insertion(+)
+ create mode 100644 new
+ create mode 100644 newfile1
+
+ubuntu@ip-172-31-31-36:~/training$ git log --pretty=oneline
+2547c210d4ec5dbf47e24fce0c61c9aa3f22938a (HEAD -> feature) adding files in feature
+32e39e905a71611198f979046436abcb36ecf2dc (orgin/master, master) Create README.md
+13b76525091c0e3fbcf30b40478c6c07719f6975 addition
+
+
+ubuntu@ip-172-31-31-36:~/training$ git checkout master
+Switched to branch 'master'
+ubuntu@ip-172-31-31-36:~/training$ ls
+README.md  test
+
+ubuntu@ip-172-31-31-36:~/training$ git checkout feature
+Switched to branch 'feature'
+ubuntu@ip-172-31-31-36:~/training$ git push orgin feature
+Username for 'https://github.com': saaritsinha                                 Password for 'https://saaritsinha@github.com':
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 323 bytes | 323.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+remote:
+remote: Create a pull request for 'feature' on GitHub by visiting:
+remote:      https://github.com/saaritssinha/newrepo/pull/new/feature
+remote:
+To https://github.com/saaritssinha/newrepo.git
+ * [new branch]      feature -> feature
+
+//////////////////new feature branch with files are created in github
+
+ubuntu@ip-172-31-31-36:~/training$ git branch newbranch
+ubuntu@ip-172-31-31-36:~/training$ git checkout -b testbranch
+Switched to a new branch 'testbranch'
+ubuntu@ip-172-31-31-36:~/training$ git branch
+  feature
+  master
+  newbranch
+* testbranch
+
+
+ubuntu@ip-172-31-31-36:~/training$ git branch -d newbranch
+Deleted branch newbranch (was 2547c21).
+
+
+
+git clone URL -b branchname   ////clone a branch
+
+
+
+ubuntu@ip-172-31-31-36:~/training$ git checkout master
+Switched to branch 'master'
+ubuntu@ip-172-31-31-36:~/training$ git merge feature
+Updating 32e39e9..2547c21
+Fast-forward
+ new      | 0
+ newfile1 | 1 +
+ 2 files changed, 1 insertion(+)
+ create mode 100644 new
+ create mode 100644 newfile1
+ubuntu@ip-172-31-31-36:~/training$ ls
+README.md  new  newfile1  test
+
+
+
+
+ubuntu@ip-172-31-31-36:~/training$ git log --graph --pretty=oneline
+* 2547c210d4ec5dbf47e24fce0c61c9aa3f22938a (HEAD -> master, orgin/feature, testbranch, feature) adding files in feature
+* 32e39e905a71611198f979046436abcb36ecf2dc (orgin/master) Create README.md
+* 13b76525091c0e3fbcf30b40478c6c07719f6975 addition
+
+
+
+ubuntu@ip-172-31-31-36:~/training$ git push orgin master
+Username for 'https://github.com': saaritssinha
+Password for 'https://saaritssinha@github.com':
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/saaritssinha/newrepo.git
+   32e39e9..2547c21  master -> master
+
+
+ubuntu@ip-172-31-31-36:~/training$ git branch
+  feature
+* master
+  testbranch
+ubuntu@ip-172-31-31-36:~/training$ git checkout feature
+Switched to branch 'feature'
+ubuntu@ip-172-31-31-36:~/training$ ls
+README.md  new  newfile1  test
+ubuntu@ip-172-31-31-36:~/training$ vim new
+ubuntu@ip-172-31-31-36:~/training$ vim newfile1
+ubuntu@ip-172-31-31-36:~/training$ vim test
+ubuntu@ip-172-31-31-36:~/training$ git status
+On branch feature
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   new
+        modified:   newfile1
+        modified:   test
+
+
+ubuntu@ip-172-31-31-36:~/training$ git stash  //// all changes temp goes off
+Saved working directory and index state WIP on feature: 2547c21 adding files in feature
+ubuntu@ip-172-31-31-36:~/training$ git stash list
+stash@{0}: WIP on feature: 2547c21 adding files in feature
+ubuntu@ip-172-31-31-36:~/training$ cat new
+ubuntu@ip-172-31-31-36:~/training$ cat newfile1
+hello world
+ubuntu@ip-172-31-31-36:~/training$ cat test
+
+
+ubuntu@ip-172-31-31-36:~/training$ git stash pop  ////old changes are back
+On branch feature
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   new
+        modified:   newfile1
+        modified:   test
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0} (7bb987e64887a370ca8ba248ded0e99735bfc23a)
+
+
+
+ubuntu@ip-172-31-31-36:~/training$ git status
+On branch feature
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   new
+        modified:   newfile1
+        modified:   test
+
+no changes added to commit (use "git add" and/or "git commit -a")
+ubuntu@ip-172-31-31-36:~/training$ git add new newfile1
+ubuntu@ip-172-31-31-36:~/training$ git commit -m "changes done but will be reve                                                                      rted"
+[feature 7034b6b] changes done but will be reverted
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+ubuntu@ip-172-31-31-36:~/training$ git status
+On branch feature
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   test
+
+no changes added to commit (use "git add" and/or "git commit -a")
+ubuntu@ip-172-31-31-36:~/training$ git log --pretty=oneline
+7034b6b96f7a83dcc57c645314cdb207ce52f3b4 (HEAD -> feature) changes done but wil                                                                      l be reverted
+2547c210d4ec5dbf47e24fce0c61c9aa3f22938a (orgin/master, orgin/feature, testbran                                                                      ch, master) adding files in feature
+32e39e905a71611198f979046436abcb36ecf2dc Create README.md
+13b76525091c0e3fbcf30b40478c6c07719f6975 addition
+ubuntu@ip-172-31-31-36:~/training$ git revert 7034b6b96f7a83dcc57c645314cdb207c                                                                      e52f3b4
+[feature 7963744] Revert "changes done but will be reverted"
+ 2 files changed, 1 insertion(+), 3 deletions(-)
+ubuntu@ip-172-31-31-36:~/training$ cat new
+ubuntu@ip-172-31-31-36:~/training$

@@ -1,0 +1,48 @@
+- name: play1 for playbook
+  hosts: all
+  become: yes
+  tasks:
+   - name: installing nginx
+     apt:
+        name: nginx
+        state: present
+     notify:
+         - restart nginx 
+
+   - name: taking backup of original html file
+     command: mv /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html_backup
+     notify:
+         - restart nginx
+
+   - name: updating index page
+     copy:
+         src: index.nginx-debian.html
+         dest: /var/www/html/
+     notify:
+         - restart nginx
+
+   #- name: Restart service 
+    # systemd:
+     #   name: nginx
+      #  state: restarted
+
+  handlers:
+   - name: restart nginx
+     service:
+         name: nginx
+         state: restarted
+
+- name: play2 for playbook
+  hosts: group2
+  become: yes
+  tasks:
+   - name: Create a directory if it does not exist
+     file:
+       path: /tmp/new
+       state: directory
+
+   - name: copying file
+     copy:
+        src: new
+        dest: /tmp/new
+

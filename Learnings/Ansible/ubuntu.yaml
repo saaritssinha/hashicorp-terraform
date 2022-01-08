@@ -1,0 +1,25 @@
+# Define debain tasks
+
+- name: installing nginx
+  apt:
+     name: nginx
+     state: present
+  notify:
+     - restart nginx
+
+- name: taking backup of original html file
+  command: mv /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html_backup
+  notify:
+     - restart nginx
+
+- name: updating index page
+  copy:
+     src: index.nginx-debian.html
+     dest: /var/www/html/
+  notify:
+     - restart nginx
+
+- name: Start service
+  systemd:
+      name: nginx
+      state: started

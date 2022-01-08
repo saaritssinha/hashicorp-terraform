@@ -1,0 +1,94 @@
+- name: play1 for playbook
+  hosts: all
+  become: yes
+  tasks:
+   - name: installing nginx
+     apt:
+        name: nginx
+        state: present
+     notify:
+         - restart nginx 
+
+   - name: taking backup of original html file
+     command: mv /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html_backup
+     notify:
+         - restart nginx
+
+   - name: updating index page
+     copy:
+         src: index.nginx-debian.html
+         dest: /var/www/html/
+     notify:
+         - restart nginx
+
+   #- name: Restart service 
+    # systemd:
+     #   name: nginx
+      #  state: restarted
+
+  handlers:
+   - name: restart nginx
+     service:
+         name: nginx
+         state: restarted
+
+- name: play2 for playbook
+  hosts: group2
+  become: yes
+  tasks:
+   - name: Create a directory if it does not exist
+     file:
+       path: /tmp/new
+       state: directory
+
+   - name: copying file
+     copy:
+        src: new
+        dest: /tmp/new
+
+- name: play3 for variable practice
+  hosts: group1
+  vars:
+   - username: Devops
+   - message: Hello
+  tasks:
+   - name: first variable
+     debug:
+       msg: " User : {{username}} wants to say {{message}}"
+
+- name: play 4 for variable practice
+  hosts: group1
+  become: true
+  vars_files:
+       - variable.yml
+  vars_prompt:
+       - name: myname
+         prompt: What is your name?
+         private: no
+
+  tasks:
+   - name: calling variable file
+     debug:
+       msg: " User : {{username}} wants to say {{message}}"
+   - name: prompt message testing
+     debug:
+       msg: " User : {{myname}} wants to say {{message}}"
+   - name: Create a single user
+     user:
+        name: jenkins
+        state: present
+   - name: Create a multiple users (looping in ansible)
+     user:
+       name: '{{ item.name }}'
+       state: present
+     loop:
+         - { name: test1 }
+         - { name: test2 }
+   - name: Create a multiple users with password (looping in ansible)
+     user:
+       name: '{{ item.name }}'
+       password: '{{ item.password }}'
+       state: present
+     loop:
+         - { name: test3, password: abcd1234 }
+

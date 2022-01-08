@@ -1,0 +1,21 @@
+su     //for root 
+//installing virtual box guest additions
+    1  yum update
+    2  dnf update
+    3  dnf install tar
+    4  dnf install bzip2 kernel-devel-$(uname -r) kernel-headers perl gcc make elfutils-libelf-devel
+
+[root@localhost saarit]# exit
+exit
+[saarit@localhost ~]$ cd /run/media
+
+edit file
+
+vi .bashrc
+i // insert
+esc // exit insert
+:wq! // save quit
+:q! //quit
+
+mkdir test1 //make directory
+cd test1  //move to directory

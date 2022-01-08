@@ -1,0 +1,130 @@
+su     //for root 
+//installing virtual box guest additions
+    1  yum update
+    2  dnf update
+    3  dnf install tar
+    4  dnf install bzip2 kernel-devel-$(uname -r) kernel-headers perl gcc make elfutils-libelf-devel
+
+[root@localhost saarit]# exit
+exit
+[saarit@localhost ~]$ cd /run/media
+
+edit file
+
+vi .bashrc
+i // insert
+esc // exit insert
+:wq! // save quit
+:q! //quit
+
+mkdir test1 //make directory
+cd test1  //move to directory
+pwd //present directory
+history
+sudo apt-get install apache2 -y  //install apache2
+service apache2 status  //see status of apache
+sudo service apache2 stop //to stop apache2
+launch http://18.188.109.209/
+dpkg --list  // see all packages'
+sudo apt-get purge apache2 -y //remove packages
+
+
+///////SSH key connect to git hub
+ubuntu@ip-172-31-31-36:~$ cd /home/ubuntu/
+ubuntu@ip-172-31-31-36:~$ ll
+total 68
+drwxr-xr-x 8 ubuntu ubuntu 4096 Nov 27 05:33 ./
+drwxr-xr-x 3 root   root   4096 Nov 24 08:29 ../
+-rw------- 1 ubuntu ubuntu  122 Nov 27 05:33 .Xauthority
+-rw------- 1 ubuntu ubuntu 3003 Nov 25 03:43 .bash_history
+-rw-r--r-- 1 ubuntu ubuntu  220 Feb 25  2020 .bash_logout
+-rw-r--r-- 1 ubuntu ubuntu 3771 Nov 25 00:10 .bashrc
+drwx------ 2 ubuntu ubuntu 4096 Nov 24 08:32 .cache/
+-rw-rw-r-- 1 ubuntu ubuntu   62 Nov 25 01:05 .gitconfig
+drwxrwxr-x 3 ubuntu ubuntu 4096 Nov 25 03:29 .local/
+-rw-r--r-- 1 ubuntu ubuntu  807 Feb 25  2020 .profile
+drwx------ 2 ubuntu ubuntu 4096 Nov 24 08:29 .ssh/
+-rw-r--r-- 1 ubuntu ubuntu    0 Nov 25 00:04 .sudo_as_admin_successful
+-rw------- 1 ubuntu ubuntu 8204 Nov 25 03:14 .viminfo
+drwxrwxr-x 3 ubuntu ubuntu 4096 Nov 25 01:13 gitdemo/
+drwxrwxr-x 3 ubuntu ubuntu 4096 Nov 25 01:47 testrepo/
+drwxrwxr-x 3 ubuntu ubuntu 4096 Nov 25 03:29 training/
+ubuntu@ip-172-31-31-36:~$ mkdir connect_ssh
+ubuntu@ip-172-31-31-36:~$ cd connect_ssh/
+ubuntu@ip-172-31-31-36:~/connect_ssh$ ll
+total 8
+drwxrwxr-x 2 ubuntu ubuntu 4096 Nov 27 05:58 ./
+drwxr-xr-x 9 ubuntu ubuntu 4096 Nov 27 05:58 ../
+ubuntu@ip-172-31-31-36:~/connect_ssh$ git init
+Initialized empty Git repository in /home/ubuntu/connect_ssh/.git/
+ubuntu@ip-172-31-31-36:~/connect_ssh$ touch test1
+ubuntu@ip-172-31-31-36:~/connect_ssh$ git add .
+ubuntu@ip-172-31-31-36:~/connect_ssh$ git remote add origin git@github.com:saaritssinha/sshconnect.git
+ubuntu@ip-172-31-31-36:~/connect_ssh$ git add .
+ubuntu@ip-172-31-31-36:~/connect_ssh$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   test1
+
+ubuntu@ip-172-31-31-36:~/connect_ssh$ git commit -m "first"
+[master (root-commit) 8adffa8] first
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 test1
+ubuntu@ip-172-31-31-36:~/connect_ssh$ git push origin master
+The authenticity of host 'github.com (140.82.112.4)' can't be established.
+ECDSA key fingerprint is SHA256:p2QAMXNIC1TJYWeIOttrVc98/R1BUFWu3/LiyKgUfQM.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+Host key verification failed.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+ubuntu@ip-172-31-31-36:~/connect_ssh$ cd .ssh
+-bash: cd: .ssh: No such file or directory
+ubuntu@ip-172-31-31-36:~/connect_ssh$ cd
+ubuntu@ip-172-31-31-36:~$ cd .ssh/
+ubuntu@ip-172-31-31-36:~/.ssh$ ls
+authorized_keys
+ubuntu@ip-172-31-31-36:~/.ssh$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/ubuntu/.ssh/id_rsa
+Your public key has been saved in /home/ubuntu/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:qyGHQztMHaBSKttUiwsiRUOzEjoFSkBTxzqTTwcDd4w ubuntu@ip-172-31-31-36
+The key's randomart image is:
++---[RSA 3072]----+
+|*BXo=oo.         |
+|+*.BoE..         |
+|% = + +          |
+|+O * o o         |
+|. o B o S        |
+|   + +   .       |
+|    B o .        |
+|     = o         |
+|      .          |
++----[SHA256]-----+
+ubuntu@ip-172-31-31-36:~/.ssh$ ls
+authorized_keys  id_rsa  id_rsa.pub
+ubuntu@ip-172-31-31-36:~/.ssh$ cat id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzyBnzfjf2BqESYHgevyc6pSaMJXPOPIh+hy+xHbve/jTTZJ9tNpARUhF64xBnjgrMob3ZB3/lmmX8VxnC5xZVhgXEe9eugpR9ShA7EX1+bqg6KlVTlzv87xz3IWUoVKzZ29QQsp74ZNv2DhWi9tVl9Z8GMn3Kb/yHvU4UY8bkQxYa3lKSGLpkSUPTH9VCn5ukJmJ0GA1SHN6jd57P9bCFvyNnhjPZ4JEzdkRWgZ8HuwWjadBoAcPStvlTalX6OWR1ribQJYaNvh35NciLrNMTkAZP0Jo9rQyOCn3ltz2qa8jGhmTh2yPX6tkpxbYCVtn5/eOgavE2gCsddhErDod/zc5N4BiEcd3g7ux9K1byYtg19J/hPtttRek5Ey7Y/q4CYeMpP5nEKBNW5L/OPNvzpVW9p+gXp+fObliBt38wp7pnVomvGUZSy21S37C2PdGkRlC2yrY9l6iPf6zRozHleZsIWF+RegnsGKSVIjrTJzyIdPqr6mxH11WZn5kSM1M= ubuntu@ip-172-31-31-36
+
+
+
+in github----settings-->ssh n gpg keys--->add new ssh key
+
+
+ubuntu@ip-172-31-31-36:~/connect_ssh$ git push origin master
+Warning: Permanently added the ECDSA host key for IP address '140.82.113.4' to the list of known hosts.
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 202 bytes | 202.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To github.com:saaritssinha/sshconnect.git
+ * [new branch]      master -> master
