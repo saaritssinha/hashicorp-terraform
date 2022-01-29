@@ -1,0 +1,45 @@
+apiVersion: apps/v1 #extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: app1-nginx-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-app1
+  template:
+    metadata:
+      labels:
+        app: nginx-app1
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+         - containerPort: 80
+
+---
+
+apiVersion: apps/v1 #extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: httpd
+  name: app2-httpd-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: httpd-app2
+  template:
+    metadata:
+      labels:
+        app: httpd-app2
+    spec:
+      containers:
+      - name: httpd
+        image: httpd
+        ports:
+         - containerPort: 80

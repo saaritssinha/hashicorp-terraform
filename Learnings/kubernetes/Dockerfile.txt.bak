@@ -1,0 +1,8 @@
+FROM ubuntu
+RUN apt-get update
+RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
+RUN apt-get -y install apache2
+ADD . /var/www/html
+CMD echo ""<h1>Welcome to pod1 <font color=blue>APP2</font></h1>" > /var/www/html/index.html
+ENTRYPOINT apachectl -D FOREGROUND
+ENV name Saarit

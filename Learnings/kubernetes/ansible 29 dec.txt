@@ -1,0 +1,86 @@
+---------------------------ansible --------------------------
+
+2 server grps
+apacheserver<w1>--------------- Role1(apache2)
+                            install-------> apache2
+                            configure-----> html files <files>
+                            service -------> starting the service
+                            java------------->install.
+nginxserver<w2>---------------Role2(nginx)
+                            install-------> nginx
+                            configure-----> html files <files>
+                            service-------> starting the service 
+---------------------------------------------------------------
+3 vm ubuntu 20.04 , t2.micro , sg: all traffic.      
+ansible install cmds 
+on master
+
+sudo apt update &&
+sudo apt install software-properties-common &&
+sudo add-apt-repository --yes --update ppa:ansible/ansible &&
+sudo apt install ansible  
+----------------------------------for ssh connection
+
+on master:as a normal user
+cd .ssh
+ssh-keygen
+//hit enter
+cat id_rsa.pub
+//copy
+on worker nodes
+cd .ssh
+sudo nano authorized_keys
+//do not modifythe existing line.below that paste the key
+
+on master
+
+cd /etc/ansible
+sudo nano hosts
+[apacheserver]
+<public ip of w1>
+[nginxserver]
+<public ip of w2>
+
+cd roles
+ls
+sudo ansible-galaxy init role1
+sudo ansible-galaxy init role2  
+
+YAML FILES: 
+ROLE1
+
+main.yml
+---
+  - include: install.yml
+========================================================================
+install.yml
+---
+  - name: INSTALLING APACHE2
+    apt: name=apache2 update_cache=yes state=latest
+    become: true
+========================================================================
+playbook.yml
+---
+  - hosts: apacheserver
+    roles:
+      - role1
+=========================================================================
+
+config.yml
+---
+  - name: COPYING index.html file to target machine directory(/var/www/html)
+    copy: src=index.html dest=/var/www/html
+    become: true
+=========================================================================
+service.yml
+---
+  - name: SERVICE
+    service: name=apache2 state=started
+    become: true
+=======================================================================
+
+
+
+
+
+              

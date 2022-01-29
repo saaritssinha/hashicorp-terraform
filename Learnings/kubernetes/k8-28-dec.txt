@@ -1,0 +1,77 @@
+------------------------kubernetese --------------------
+
+apache deployement
+custom deployement
+-----------------------
+/apache-------------->apache pods.
+/custom-------------->costom pod/github application pods.
+----------------------
+steps:
+* deploy apache pods
+*create an docker img and put all the data(github application) in the img.
+                    # cloning the repo
+                    # write a dockerfile and build an img ,push the img to dockerhub
+                    # custom deployement using the custom img.
+                    
+* create service for both deployements
+*create an ingress.
+--------------------------------------------------------------------------
+
+launch 1 instance of t2.med , ubuntu 20.04, sg: all traffic
+launch 1 instance of t2.micro , ubuntu 20.04,. sg: all traffic.
+---------------------------------------------------------------
+goto :    https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-deployment
+  labels:
+    app: apache
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      labels:
+        app: apache
+    spec:
+      containers:
+      - name: apache
+        image: ubuntu/apache2
+        ports:
+        - containerPort: 80
+
+------------------------------------------------------------------------
+sudo nano apache.yml
+   11  kubectl create -f apache.yml
+   12  kubectl get pods
+   13  kubectl delete deploy apache-deployment
+   14  kubectl get pods
+   15  sudo nano apache.yml
+   16  kubectl create -f apache.yml
+   17  kubectl get pods
+   18  sudo nano apache.yml
+   19  kubectl get pods -owide
+   20  curl 192.168.188.199
+   21  clear
+   22  mkdir test
+   23  history
+
+------------------------------------------------------dockerfile
+FROM ubuntu
+RUN apt-get update
+RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
+RUN apt-get -y install apache2
+ADD . /var/www/html
+ENTRYPOINT apachectl -D FOREGROUND
+ENV name Intellipaat
+-----------------------------------------------------------
+
+goto :
+https://kubernetes.io/docs/concepts/services-networking/ingress/
+
+
+

@@ -1,0 +1,4 @@
+https://github.com/bibinwilson/kubernetes-prometheus.git
+
+
+&tds=cdr:1,cd_min:1/1/0,sdb:1
