@@ -1,0 +1,434 @@
+ifconfig / ip addr --->enp0s3
+ssh -l ec2-user 10.xx.xxx.xxx
+ls -l
+touch
+cp
+vi
+mkdir
+ls -ltr
+cp
+pwd
+man
+ll
+echo
+cat
+rm
+mv
+rm -rf
+rmdir
+chgrp root file
+chown saarit:saarit file
+inode:--> hard link
+soft link
+ln /home/saarit/hulk
+ln -s /home/saarit/hulk
+ls -ltri
+stdin 0
+stdout 1
+stderr 2
+ls -l > file
+ls -l >> file
+cat < file
+ls -l /root 2> file
+ls -lrt | more
+ls -l | tail -1
+whatis [command]
+[command] --help
+man [command]
+vi / ed / ex / emacs / pico / vim
+vi ---> shift+ZZ to save
+useradd
+groupadd
+userdel
+groupdel
+usermod
+/etc/passwd
+/etc/group
+/etc/shadow
+su -
+useradd spiderman
+id spiderman
+userdel spiderman
+usermod -G superheros(grp) spiderman
+userdel -r spiderman
+groupadd spiderman
+groupdel spiderman
+chgrp -R superheros spidermanfile
+grep spiderman /etc/passwd
+useradd -g superheros -s /bin/bash -c "user description" -m -d /home/spiderman spiderman
+passwd spiderman
+
+/etc/login.defs
+chage
+sudo useradd babubuttsudo passwd babubutt
+sudo grep babu /etc/shadow
+sudo chage -m 5 -M 90 -W 10 -I 3 babubutt
+
+su - username
+sudo command
+visudo
+/etc/sudoer
+usermod -aG wheel saarit
+r w x
+u g o
+chmod
+chmod g-w file
+chmod a-r file
+chmod u-w file
+chmod u+rw file
+chmod g+rw file
+chmod o+r file
+chmod a-x directory/
+executable rt is required to cd in a directory
+
+chown root file 
+chgrp spider file
+-R
+chown root -R directory
+
+whoami
+df
+df -h
+df -T
+du
+du -h /
+du -k /
+du -k / | sort -nr | more
+uptime
+top
+free -h
+free -m
+lsof
+tcpdump
+ifconfig
+netstat -a -au -at -aux etc
+ps -ef | grep top
+ps -ef | more
+kill PID
+kill -9 kill
+
+systemctl
+systemd is parent of all daemons
+systemctl --version
+ps -ef | grep system
+systemctl --all
+systemctl status\start\stop\restart application.service
+systemctl reload application.service
+systemctl enable/disable application.service
+systemctl mask|unmask application.service
+
+rpm -qa
+rpm -qa | wc -l
+
+ssh 
+openssh
+sshd - daemon 
+22
+encrypted
+for more security: configure idle timeout interval ---- /etc/ssh/sshd_config   :---> ClientAliveInterval 600     ClientAliveCountMax 0  etc 
+systemctl restart sshd
+disable root login ------- /etc/ssh/sshd_config    :--->  PermitRootLogin no
+disable empty passwords :---> PermitEmptyPassword no 
+Limit user's ssh acccess   :---> AllowUsers saarit manav
+Use a different port : ------> Port 22224
+Passwordless ssh keys
+server------>client server 2
+be careful of users
+saarit                  root
+ssh-keygen at server
+ssh-copy-id root@clientserver2IP from server 
+ssh root@clientserver2IP
+
+logs
+default- /var/log 
+ll  /alphabetically
+tail -f logs
+messages
+chrony
+cron
+maillogs
+secure
+boot.log
+
+chronyd-NTP service
+date
+timedatectl
+timedatectl --help
+man timedatectl
+timedatectl list-timezones
+sudo timedatectl set-timezone Asia/Kolkata
+timedatectl set-time HH:MM:SS
+timedatectl set-time '2022-02-14 22:00:00'
+timedatectl set-ntp true
+
+chronyd = for time synchronisation
+package= chrony
+conf= /etc/chronyd.conf
+Log file=/var/log/chrony
+Service= systemctl start/restart chronyd
+program command= chronyc
+rpm -qa | grep chrony
+yum install chrony
+make sure ntpd is stopped
+
+NETWORKING
+ifconfig
+ip addr
+network interfaces: ifconfig
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9001
+        inet 172.31.19.220  netmask 255.255.240.0  broadcast 172.31.31.255
+        ether 0a:c5:dd:69:a5:89  txqueuelen 1000  (Ethernet)
+        RX packets 417092  bytes 558429890 (532.5 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 119796  bytes 11616407 (11.0 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 26  bytes 2528 (2.4 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 26  bytes 2528 (2.4 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+mac address
+subnet mask 
+Gateway:netstat -rvn
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         172.31.16.1     0.0.0.0         UG        0 0          0 eth0
+172.31.16.0     0.0.0.0         255.255.240.0   U         0 0          0 eth0
+
+DNS:  nslookup www.facebook.com
+Server:         172.31.0.2
+Address:        172.31.0.2#53
+
+Non-authoritative answer:
+www.facebook.com        canonical name = star-mini.c10r.facebook.com.
+Name:   star-mini.c10r.facebook.com
+Address: 157.240.229.35
+Name:   star-mini.c10r.facebook.com
+Address: 2a03:2880:f103:181:face:b00c:0:25de
+
+systemctl status NetworkManager
+net conf: nmcli
+nmtui
+nm-connection-editor
+GNOME settings
+
+nmcli
+[ec2-user@ip-172-31-19-220 ~]$ nmcli connection
+NAME         UUID                                  TYPE      DEVICE
+System eth0  5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03  ethernet  eth0
+ens3         02cc87e6-dc7c-4c9e-a530-f908611c7f5e  ethernet  --
+
+sudo nmtui .... can bond/team also
+
+nm-connection-editor in GUI
+gui-->settings-->network : GNOME settings
+
+Via scripts:
+[ec2-user@ip-172-31-19-220 ~]$ cd /etc/sysconfig/network-scripts/
+[ec2-user@ip-172-31-19-220 network-scripts]$ ls
+ifcfg-ens3  ifcfg-eth0
+[ec2-user@ip-172-31-19-220 network-scripts]$ cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+[ec2-user@ip-172-31-19-220 network-scripts]$ ping localhost
+PING localhost(localhost (::1)) 56 data bytes
+64 bytes from localhost (::1): icmp_seq=1 ttl=64 time=0.027 ms
+64 bytes from localhost (::1): icmp_seq=2 ttl=64 time=0.033 ms
+64 bytes from localhost (::1): icmp_seq=3 ttl=64 time=0.031 ms
+64 bytes from localhost (::1): icmp_seq=4 ttl=64 time=0.033 ms
+64 bytes from localhost (::1): icmp_seq=5 ttl=64 time=0.033 ms
+64 bytes from localhost (::1): icmp_seq=6 ttl=64 time=0.032 ms
+64 bytes from localhost (::1): icmp_seq=7 ttl=64 time=0.032 ms
+^C
+--- localhost ping statistics ---
+7 packets transmitted, 7 received, 0% packet loss, time 6151ms
+rtt min/avg/max/mdev = 0.027/0.031/0.033/0.006 ms
+[ec2-user@ip-172-31-19-220 network-scripts]$ ping ip-172-31-19-220
+PING ip-172-31-19-220.ec2.internal (172.31.19.220) 56(84) bytes of data.
+64 bytes from ip-172-31-19-220.ec2.internal (172.31.19.220): icmp_seq=1 ttl=64 time=0.037 ms
+64 bytes from ip-172-31-19-220.ec2.internal (172.31.19.220): icmp_seq=2 ttl=64 time=0.033 ms
+64 bytes from ip-172-31-19-220.ec2.internal (172.31.19.220): icmp_seq=3 ttl=64 time=0.033 ms
+^C
+--- ip-172-31-19-220.ec2.internal ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2025ms
+rtt min/avg/max/mdev = 0.033/0.034/0.037/0.005 ms
+[ec2-user@ip-172-31-19-220 network-scripts]$ cat /etc/hostname
+ip-172-31-19-220.ec2.internal
+/////RESTART NetworkManager
+which is my DNS: [ec2-user@ip-172-31-19-220 network-scripts]$ cat /etc/resolv.conf
+# Generated by NetworkManager
+search ec2.internal
+nameserver 172.31.0.2
+
+Network movements/searches conf : cat /etc/nsswitch.conf
+
+
+ping 
+ifconfig / ip
+ifup or ifdown : same vianmtui to activate/deactivate a connection
+netstat 
+traceroute
+tcpdump   ///trafic incoming n outgoing
+sudo tcpdump -i eth0
+nslookup or dig// to get ip of dns or website
+sudo ethtool eth0
+
+Compressing / uncompressing files:
+tar cvf saarit.tar /home/saarit
+tar cvf saarit.tar .
+mkdir bhap
+cd bhap
+mv /home/saarit/saarit.tar /home/saarit/bhap/
+tar xvf saarit.tar
+gzip saarit.tar ///compress the tar file
+gzip -d saarit.tar.gz ////gunzip ///uncompression
+gunzip saarit.tar.gz
+
+FTP:
+server-client;file transfer;port-21
+Client ----> server (file transfer)
+ftpd on server at 21 shd be running
+Installation n configure FTP:
+become root
+rpm -qa | grep ftpd
+ping www.google.com
+yum install vsftpd
+vi /etc/vsftpd/vsftpd.conf (make a backup)
+Disable anonymous login: anonymous_enable=No
+ascii_upload_enable=YES
+ascii_download_enable=YES
+ftpd_banner=Welcome to UNIXMEN FTP service
+use_localtime=YES
+
+systemctl start vsftpd
+systemctl enable vsftpd
+systemctl stop firewalld
+systemctl disable firewalld
+or add rule ftp port on firewalld in prod
+useradd saarit
+
+Installation on client server:
+become root
+yum install ftp 
+su - saarit
+touch kruger
+
+ftp 192.168.1.x //to server
+enter username n passwords
+bi/bin
+hash
+put kruger
+bye
+
+
+SCP:secure copy protocol;local to remote;22 port;same ssh protocol
+login as saarit in client server
+touch spider
+scp spider saarit@remoteserverip:/home/saarit
+
+Install n update software packages:
+yum/dnf and rpm commands---linux packages: yum or apt-get uses internet access or if no internet repos are created locally by in same network using rpm
+rpm - when u already have packages in local repos where there is no internet access- no dependencies
+rpm -qa 
+rpm -qa | wc -l
+rpm -qa | grep bind
+yum install bind- downloads n install the packages n also dependencies
+rpm -qa | grep bind
+rpm -ihv /tmp/package.rpm //installing
+rpm -e package ///remove package
+yum remove package
+
+System upgrade/patch management:
+cat /etc/redhat-release
+cat /etc/*-release ///check version of linux
+yum update -y //for minor version, keep old packges
+yum ugrade -y // deletes old packages n get new ones
+cat /etc/*-release
+cat /etc/redhat-release
+sudo yum update
+rpm -qa | grep ksh
+ping www.google.com
+sudo yum install ksh*
+rpm -qa | grep ksh
+sudo yum remove ksh
+rpm -qa | grep ksh
+sudo yum install wget -y
+wget https://rpmfind.net/linux/fedora/linux/releases/34/Everything/x86_64/os/Packages/k/ksh-20120801-255.fc34.x86_64.rpm
+rpm -qa | grep ksh
+ls
+rpm -ihv ksh-20120801-255.fc34.x86_64.rpm
+rpm -e package
+sudo yum install ksh
+rpm -qi ksh-20120801-254.el8.x86_64
+rpm -qc ksh-20120801-254.el8.x86_64
+which ksh
+rpm -qf /usr/bin/ksh
+pwd
+which pwd
+rpm -qf /usr/bin/pwd
+
+Access linux file systems:
+ls: ls -lrt , ls -l 
+cd:change directory
+pwd:print working directory
+df
+du
+fdisk: create disk: fdisk -l 
+absolute n relative path
+~
+.
+..
+
+Analyse server and get support:
+Cockpit:server admin tool
+sos: yum install sos
+sos report
+cockpit: installation n configure---
+ping www.google.com
+sudo yum install cockpit -y
+rpm -qa | grep cockpit
+systemctl start cockpit
+systemctl enable cockpit 
+systemctl stop firewalld
+https://ip:9090/
+cockpit is awesome
+https://3.80.136.9:9090/
+
+
+echo $0
+cat /etc/shells
+cat /etc/passwd : ec2-user:x:1000:1000:Cloud User:/home/ec2-user:/bin/bash
+shell scripts --- 755
+bash scripting
+
+grep/egrep
+grep --version
+grep --help
+grep error file.txt
+grep -c error file.txt
+grep -i error file.txt
+grep -n error file.txt
+grep -vi error file.txt
+grep -i error file.txt | awk '(print $1)'
+grep -i error file.txt | awk '(print $1)' | cut -c1-3
+ls -l | grep -i desktop
+egrep -i "error|failed" file.txt
+
+
+crontab
+
+
+
+
+
+
+
+
+
+
+
